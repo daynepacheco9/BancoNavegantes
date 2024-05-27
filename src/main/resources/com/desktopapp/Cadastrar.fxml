@@ -16,13 +16,41 @@
             <Font name="Bosch Sans Black" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="111.0" text="Nome Completo:" />
-      <Label layoutX="51.0" layoutY="167.0" text="CPF:" />
-      <Label layoutX="51.0" layoutY="223.0" text="Data de Nascimento:" />
-      <Label layoutX="49.0" layoutY="279.0" text="Telefone:" />
-      <Label layoutX="354.0" layoutY="111.0" text="E-mail:" />
-      <Label layoutX="354.0" layoutY="167.0" text="Senha:" />
-      <Label layoutX="354.0" layoutY="223.0" text="Confirme sua senha:" />
+      <Label layoutX="51.0" layoutY="111.0" text="Nome Completo:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="167.0" text="CPF:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="223.0" text="Data de Nascimento:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="279.0" text="Telefone:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="354.0" layoutY="111.0" text="E-mail:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="354.0" layoutY="167.0" text="Senha:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="354.0" layoutY="223.0" text="Confirme sua senha:">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Label>
       <TextField id="tfNome" fx:id="tfNome" layoutX="49.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" />
       <TextField id="tfCPF" fx:id="tfCPF" layoutX="49.0" layoutY="184.0" prefHeight="25.0" prefWidth="174.0" />
       <DatePicker id="dpData" fx:id="dpData" layoutX="49.0" layoutY="240.0" />
@@ -30,6 +58,10 @@
       <TextField id="tfEmail" fx:id="tfEmail" layoutX="354.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" />
       <PasswordField id="pfSenha" fx:id="pfSenha" layoutX="354.0" layoutY="184.0" prefHeight="25.0" prefWidth="174.0" />
       <PasswordField id="psCSenha" fx:id="psCSenha" layoutX="354.0" layoutY="240.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button id="btCadastrar" fx:id="btCadastrar" layoutX="354.0" layoutY="284.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+      <Button id="btCadastrar" fx:id="btCadastrar" layoutX="354.0" layoutY="284.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
