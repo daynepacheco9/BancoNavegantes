@@ -36,34 +36,44 @@
          </font>
       </Label>
       <Button id="btVisualizar" fx:id="btVisualizar" layoutX="516.0" layoutY="60.0" mnemonicParsing="false" text="Visualizar" />
-      <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="53.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="84.0" fitWidth="95.0" layoutX="102.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/3076631.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="237.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="84.0" fitWidth="95.0" layoutX="259.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/3069455.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="415.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="84.0" fitWidth="87.0" layoutX="399.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/2146144.png" />
          </image>
       </ImageView>
-      <Button id="btPagamento" fx:id="btPagamento" layoutX="64.0" layoutY="308.0" mnemonicParsing="false" text="Pagamentos">
+      <Button id="btPagamento" fx:id="btPagamento" layoutX="100.0" layoutY="271.0" mnemonicParsing="false" text="Pagamentos">
          <font>
-            <Font name="Bosch Sans Regular" size="14.0" />
+            <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
-      <Button id="btTransferencia" fx:id="btTransferencia" layoutX="244.0" layoutY="308.0" mnemonicParsing="false" text="Transfêrencia">
+      <Button id="btTransferencia" fx:id="btTransferencia" layoutX="252.0" layoutY="183.0" mnemonicParsing="false" text="Transfêrencia">
          <font>
-            <Font name="Bosch Sans Regular" size="14.0" />
+            <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
-      <Button id="btDeposito" fx:id="btDeposito" layoutX="437.0" layoutY="308.0" mnemonicParsing="false" text="Depósito">
+      <Button id="btDeposito" fx:id="btDeposito" layoutX="407.0" layoutY="259.0" mnemonicParsing="false" text="Depósito">
          <font>
-            <Font name="Bosch Sans Regular" size="14.0" />
+            <Font name="Bosch Sans Regular" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="84.0" fitWidth="95.0" layoutX="263.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/2746028.png" />
+         </image>
+      </ImageView>
+      <Button id="btPagProg" fx:id="btPagProg" layoutX="216.0" layoutY="350.0" mnemonicParsing="false" prefWidth="169.0" text="Pagamentos Programados">
+         <font>
+            <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
    </children>
