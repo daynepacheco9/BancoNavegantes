@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.LoginController">
+   <children>
+      <Label layoutX="189.0" layoutY="89.0" text="Banco Navegantes">
+         <font>
+            <Font name="Bosch Sans Black" size="24.0" />
+         </font>
+      </Label>
+      <TextField id="tfLogin" fx:id="tfLogin" layoutX="199.0" layoutY="175.0" prefHeight="25.0" prefWidth="203.0" />
+      <Label layoutX="199.0" layoutY="144.0" text="login:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="199.0" layoutY="223.0" text="Senha:" />
+      <Button id="btEntrar" fx:id="btEntrar" layoutX="354.0" layoutY="294.0" mnemonicParsing="false" text="Entrar" />
+      <Button id="btCadastro" fx:id="btCadastro" layoutX="199.0" layoutY="294.0" mnemonicParsing="false" onAction="#cadastro" text="Cadastrar-se" />
+      <PasswordField id="psSenha" fx:id="psSenha" layoutX="199.0" layoutY="253.0" prefHeight="25.0" prefWidth="203.0" />
+   </children>
+</Pane>
