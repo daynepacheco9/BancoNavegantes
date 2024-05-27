@@ -25,7 +25,27 @@ public class UserData {
     @Column(name = "UserBalance")
     private Double userbalance;
 
+    private boolean isShowing;
 
+    public UserData(String username, String userpass, String usercpf, Date userbirthdate, String userphone, String useremail) {
+        this.username = username;
+        this.userpass = userpass;
+        this.usercpf = usercpf;
+        this.userbirthdate = userbirthdate;
+        this.userphone = userphone;
+        this.useremail = useremail;
+        this.userbalance = 0.0;
+
+        this.isShowing = false;
+    }
+
+
+    public boolean getIsShowing() {
+        return isShowing;
+    }
+    public void setIsShowing(boolean isShowing) {
+        this.isShowing = isShowing;
+    }
     public Long getId() {
         return id;
     }

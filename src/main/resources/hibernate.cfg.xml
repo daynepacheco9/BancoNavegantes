@@ -1,16 +1,13 @@
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://
-hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">
             com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <property name="hibernate.connection.url">jdbc:sqlserver://CGS-C-0001L\SQLEXPRESS;databaseName=desktopapp;integrate
+        <property name="hibernate.connection.url">jdbc:sqlserver://CT-C-001YR\SQLEXPRESS;databaseName=desktopapp;integrate
             dSecurity=true;encrypt=true;trustServerCertificate=true</property>
         <property name="hibernate.connection.integratedSecurity">true</property>
-        <property name="java.library.path">C:\Program
-            Files\sqljdbc_12.6.1.0_ptb\sqljdbc_12.6\ptb\auth\x64\mssqljdbc_
-            auth-12.6.1.x64.dll</property>
+        <property name="java.library.path">C:\Program Files\sqljdbc_12.6.1.0_ptb\sqljdbc_12.6\ptb\auth\x64\mssql-jdbc_auth-12.6.1.x64.dll</property>
         <!-- JDBC connection pool settings -->
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
