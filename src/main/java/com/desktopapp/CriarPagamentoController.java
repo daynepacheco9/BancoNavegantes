@@ -44,18 +44,18 @@ public class CriarPagamentoController {
     @FXML
     protected Button btVoltar;
 
-    @FXML
-    protected void voltar(ActionEvent e) throws Exception {
+    // @FXML
+    // protected void voltar(ActionEvent e) throws Exception {
 
-        Stage crrStage = (Stage) btVoltar
-                .getScene().getWindow();
-        crrStage.close();
+    //     Stage crrStage = (Stage) btVoltar
+    //             .getScene().getWindow();
+    //     crrStage.close();
 
-        Stage stage = new Stage();
-        Scene scene = HomeController.CreateScene();
-        stage.setScene(scene);
-        stage.show();
-    }
+    //     Stage stage = new Stage();
+    //     Scene scene = HomeController.CreateScene();
+    //     stage.setScene(scene);
+    //     stage.show();
+    // }
 
     
 }
