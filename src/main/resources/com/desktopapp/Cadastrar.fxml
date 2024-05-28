@@ -57,7 +57,7 @@
       <TextField id="tfFone" fx:id="tfFone" layoutX="49.0" layoutY="296.0" prefHeight="25.0" prefWidth="174.0" />
       <TextField id="tfEmail" fx:id="tfEmail" layoutX="354.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" />
       <PasswordField id="pfSenha" fx:id="pfSenha" layoutX="354.0" layoutY="184.0" prefHeight="25.0" prefWidth="174.0" />
-      <PasswordField id="psCSenha" fx:id="psCSenha" layoutX="354.0" layoutY="240.0" prefHeight="25.0" prefWidth="174.0" />
+      <PasswordField id="pfCSenha" fx:id="pfCSenha" layoutX="354.0" layoutY="240.0" prefHeight="25.0" prefWidth="174.0" />
       <Button id="btCadastrar" fx:id="btCadastrar" layoutX="354.0" layoutY="284.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />

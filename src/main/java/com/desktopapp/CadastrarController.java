@@ -2,6 +2,9 @@ package com.desktopapp;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,25 +69,63 @@ public class CadastrarController {
         Matcher regexPhone = Pattern.compile("^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[0-9])[0-9]{3}\\-?[0-9]{4}$").matcher(tfFone.getText());
         Matcher regexEmail = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$").matcher(tfEmail.getText());
 
-        if (!regexCPF.matches()) {
+        if (tfNome.getText().isEmpty() || tfNome.getText() == null) {
             Alert alert = new Alert(
-                AlertType.ERROR,
-                "CPF inválido!",
-                ButtonType.OK);
+                    AlertType.ERROR,
+                    "Nome inválido!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        } if (!regexCPF.matches()) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "CPF inválido!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        } if (dpData.getValue() == null) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Digite uma data de nascimento!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        int age = (Period.between(dpData.getValue(), LocalDate.now())).getYears();
+        if (age < 18) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Menores de idade não são permitidos no Banco Navegantes!",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         } if (!regexPhone.matches()) {
             Alert alert = new Alert(
-                AlertType.ERROR,
-                "Telefone inválido!",
-                ButtonType.OK);
+                    AlertType.ERROR,
+                    "Telefone inválido!",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         } if (!regexEmail.matches()) {
             Alert alert = new Alert(
-                AlertType.ERROR,
-                "E-mail inválido!",
-                ButtonType.OK);
+                    AlertType.ERROR,
+                    "E-mail inválido!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        } if (pfSenha.getText().isEmpty() || pfCSenha.getText() == null) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Digite uma senha!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        } if (!(pfSenha.getText()).equals(pfCSenha.getText())) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "A senha e a confirmação precisam ser iguais!",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         }
@@ -94,8 +135,54 @@ public class CadastrarController {
                 .getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
+        Query queryCPF = session
+                .createQuery("from UserData u where u.usercpf = :cpf");
+        queryCPF.setParameter("cpf", regexCPF.group().replaceAll("[^0-9]", ""));
+        List<UserData> CPFs = queryCPF.list();
+
+        if (CPFs.size() != 0) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "CPF já cadastrado!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            transaction.commit();
+            return;
+        }
+
+        Query queryPhone = session
+                .createQuery("from UserData u where u.userphone = :phone");
+        queryPhone.setParameter("phone", regexPhone.group().replaceAll("[^0-9]", ""));
+        List<UserData> phones = queryPhone.list();
+
+        if (phones.size() != 0) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Telefone já cadastrado!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            transaction.commit();
+            return;
+        }
+
+        Query queryEmail = session
+                .createQuery("from UserData u where u.useremail = :email");
+        queryEmail.setParameter("email", tfEmail.getText());
+        List<UserData> emails = queryEmail.list();
+
+        if (emails.size() != 0) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "E-mail já cadastrado!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            transaction.commit();
+            return;
+        }
+
         UserData newUser = new UserData(tfNome.getText(), pfSenha.getText(), regexCPF.group().replaceAll("[^0-9]", ""),
-                Date.valueOf(dpData.getValue()), tfFone.getText(), tfEmail.getText());
+                Date.valueOf(dpData.getValue()), regexPhone.group().replaceAll("[^0-9]", ""), tfEmail.getText());
+
         session.save(newUser);
 
         transaction.commit();

@@ -27,6 +27,8 @@ public class UserData {
 
     private boolean isShowing;
 
+    public UserData() {}
+
     public UserData(String username, String userpass, String usercpf, Date userbirthdate, String userphone, String useremail) {
         this.username = username;
         this.userpass = userpass;
