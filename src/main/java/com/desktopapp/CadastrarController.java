@@ -24,7 +24,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -135,7 +134,7 @@ public class CadastrarController {
                 .getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        Query queryCPF = session
+        Query queryCPF = session 
                 .createQuery("from UserData u where u.usercpf = :cpf");
         queryCPF.setParameter("cpf", regexCPF.group().replaceAll("[^0-9]", ""));
         List<UserData> CPFs = queryCPF.list();

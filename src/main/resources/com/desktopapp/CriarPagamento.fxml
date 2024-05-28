@@ -15,7 +15,7 @@
             <Font name="Bosch Sans Black" size="24.0" />
          </font>
       </Label>
-      <Button id="btCriar" fx:id="btCriar" layoutX="243.0" layoutY="329.0" mnemonicParsing="false" text="Criar Pagamento">
+      <Button id="btCriar" fx:id="btCriar" layoutX="243.0" layoutY="329.0" mnemonicParsing="false" onAction="#criar" text="Criar Pagamento">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
