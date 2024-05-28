@@ -19,7 +19,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label id="tfUsuario" fx:id="tfUsuario" layoutX="53.0" layoutY="60.0" text="Usuário">
+      <Label id="lbUsuario" fx:id="lbUsuario" layoutX="53.0" layoutY="60.0" text="Usuário">
          <font>
             <Font name="Bosch Sans Black Italic" size="16.0" />
          </font>
@@ -29,7 +29,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label id="tfSaldo" fx:id="tfSaldo" layoutX="450.0" layoutY="59.0" text="0000.00">
+      <Label id="lbSaldo" fx:id="lbSaldo" layoutX="450.0" layoutY="59.0" text="0000.00">
          <font>
             <Font size="16.0" />
          </font>

@@ -2,6 +2,8 @@ package com.desktopapp;
 
 import java.net.URL;
 
+import com.desktopapp.model.UserData;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,23 +16,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class HomeController {
-    public static Scene CreateScene() throws Exception {
+    public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = HomeController.class
                 .getResource("Home.fxml");
-        Parent root = FXMLLoader.load(sceneUrl);
-        Scene scene = new Scene(root);
+
+        FXMLLoader loader = new FXMLLoader(sceneUrl);
+        HomeController controller = loader.getController();
+        Scene scene = new Scene(loader.load());
+        
         return scene;
     }
 
     @FXML
-    protected TextField tfUsuario;
+    protected Label lbUsuario;
 
     @FXML
-    protected TextField tfSaldo;
+    protected Label tfSaldo;
 
     @FXML
     protected Button btVisualizar;
@@ -87,6 +93,5 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
-
 
 }

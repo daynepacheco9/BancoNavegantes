@@ -1,6 +1,15 @@
 package com.desktopapp;
 
 import java.net.URL;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.desktopapp.model.UserData;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,27 +43,63 @@ public class LoginController {
     @FXML
     protected Button btCadastro;
 
-    // @FXML
-    // protected void tryLogin(ActionEvent e) throws Exception {
-    // Authentification auth = Authentification.tryLogin(
-    // tfLogin.getText(), pfSenha.getText());
-    // if (!auth.userExists()) {
-    // Alert alert = new Alert(
-    // AlertType.ERROR,
-    // "Usuário inexistente.",
-    // ButtonType.OK);
-    // alert.showAndWait();
-    // return;
-    // }
-    // if (auth.getUser() == null) {
-    // Alert alert = new Alert(
-    // AlertType.ERROR,
-    // "Senha incorreta.",
-    // ButtonType.OK);
-    // alert.showAndWait();
-    // return;
-    // }
-    // }
+    @FXML
+    protected void tryLogin()throws Exception {
+
+        Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfLogin.getText());
+
+        if (!regexCPF.matches()) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "CPF inválido!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        String cpf = regexCPF.group().replaceAll("[^0-9]", "");
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query queryCPF = session
+                .createQuery("from UserData u where u.usercpf = :cpf");
+        queryCPF.setParameter("cpf", cpf);
+        List<UserData> CPFs = queryCPF.list();
+
+        transaction.commit();
+
+        if (CPFs.size() == 0) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "CPF não cadastrado!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        UserData loggedUser = CPFs.get(0);
+
+        if (!loggedUser.getUserpass().equals(pfSenha.getText())) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Senha incorreta!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        Stage crrStage = (Stage) btCadastro
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = HomeController.CreateScene(loggedUser);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     protected void cadastro(ActionEvent e) throws Exception {
