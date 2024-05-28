@@ -21,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class HomeController {
+    
     public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = HomeController.class
                 .getResource("Home.fxml");
@@ -28,7 +29,9 @@ public class HomeController {
         FXMLLoader loader = new FXMLLoader(sceneUrl);
         HomeController controller = loader.getController();
         Scene scene = new Scene(loader.load());
-        
+
+        controller.setLbUsuario(loggedUser.getUsername());
+       
         return scene;
     }
 
@@ -36,7 +39,7 @@ public class HomeController {
     protected Label lbUsuario;
 
     @FXML
-    protected Label tfSaldo;
+    protected Label lbSaldo;
 
     @FXML
     protected Button btVisualizar;
@@ -93,5 +96,71 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public Label getLbUsuario() {
+        return lbUsuario;
+    }
+
+    public void setLbUsuario(String usuario) {
+        this.lbUsuario.setText(usuario);
+    }
+
+    public Label getLbSaldo() {
+        return lbSaldo;
+    }
+
+    public void setLbSaldo(String saldo) {
+        this.lbSaldo.setText(saldo);
+    }
+
+    public Button getBtVisualizar() {
+        return btVisualizar;
+    }
+
+    public void setBtVisualizar(Button btVisualizar) {
+        this.btVisualizar = btVisualizar;
+    }
+
+    public Button getBtPagamento() {
+        return btPagamento;
+    }
+
+    public void setBtPagamento(Button btPagamento) {
+        this.btPagamento = btPagamento;
+    }
+
+    public Button getBtDeposito() {
+        return btDeposito;
+    }
+
+    public void setBtDeposito(Button btDeposito) {
+        this.btDeposito = btDeposito;
+    }
+
+    public Button getBtTransferencia() {
+        return btTransferencia;
+    }
+
+    public void setBtTransferencia(Button btTransferencia) {
+        this.btTransferencia = btTransferencia;
+    }
+
+    public Button getBtPagProg() {
+        return btPagProg;
+    }
+
+    public void setBtPagProg(Button btPagProg) {
+        this.btPagProg = btPagProg;
+    }
+
+    public Button getBtSair() {
+        return btSair;
+    }
+
+    public void setBtSair(Button btSair) {
+        this.btSair = btSair;
+    }
+
+    
 
 }
