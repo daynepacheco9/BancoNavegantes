@@ -18,11 +18,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class DepositoController {
-    public static Scene CreateScene() throws Exception {
+    public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = DepositoController.class
                 .getResource("Deposito.fxml");
-        Parent root = FXMLLoader.load(sceneUrl);
-        Scene scene = new Scene(root);
+
+        FXMLLoader loader = new FXMLLoader(sceneUrl);
+        Scene scene = new Scene(loader.load());
+        HomeController controller = loader.getController();
+
+        controller.setLbUsuario(loggedUser.getUsername());
+       
         return scene;
     }
 
