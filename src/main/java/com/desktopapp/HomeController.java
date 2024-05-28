@@ -51,8 +51,12 @@ public class HomeController {
     protected Button btTransferencia;
 
     @FXML
-    protected Button btPagProg;
+    protected Button btPagExi;
 
+    @FXML
+    protected Button btCriar;
+
+    @FXML
     protected Button btSair;
 
     @FXML
@@ -93,5 +97,46 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    protected void criar(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btCriar
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = CriarPagamentoController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void pagExi(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btPagExi
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = PagamentoExiController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void pagamento(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btPagamento
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = PagamentoController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 
 }

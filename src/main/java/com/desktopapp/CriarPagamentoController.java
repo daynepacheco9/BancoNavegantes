@@ -46,7 +46,7 @@ public class CriarPagamentoController {
     protected TextField tfValor;
 
     @FXML
-    protected PasswordField ptSenha;
+    protected PasswordField pfSenha;
 
     @FXML
     protected Button btCriar;
@@ -69,8 +69,18 @@ public class CriarPagamentoController {
 
     @FXML 
     protected void criar(ActionEvent e) throws Exception{
-
         Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPF.getText());
+
+        if (!regexCPF.matches()) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "CPF inválido!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+
 
         Session session = HibernateUtil
                 .getSessionFactory()
@@ -85,13 +95,25 @@ public class CriarPagamentoController {
         if (CPFs.size() == 0) {
             Alert alert = new Alert(
                     AlertType.ERROR,
-                    "CPF não Cadastrado!",
+                    "CPF já cadastrado!",
                     ButtonType.OK);
             alert.showAndWait();
             transaction.commit();
             return;
         }
-        PagamentosData newPag = new PagamentosData(tfCodigo.getText(), (double)tfValor.getText(),,CPFs.get(0).getId());
+
+        UserData dividendo = CPFs.get(0);
+
+        if (!dividendo.getUserpass().equals(pfSenha.getText())) {
+            Alert alert = new Alert(
+                    AlertType.ERROR,
+                    "Senha incorreta!",
+                    ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        PagamentosData newPag = new PagamentosData(tfCodigo.getText(),(double)tfValor.getText(), null,dividendo.getId());
 
         session.save(newPag);
 
@@ -102,9 +124,10 @@ public class CriarPagamentoController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = PagamentoExiController.CreateScene();
+        Scene scene = HomeController.CreateScene(dividendo);
         stage.setScene(scene);
         stage.show();
+
     }
 
     
