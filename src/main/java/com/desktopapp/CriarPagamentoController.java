@@ -17,20 +17,20 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class TransferenciaController {
+public class CriarPagamentoController {
     public static Scene CreateScene() throws Exception {
-        URL sceneUrl = TransferenciaController.class
-                .getResource("Transferencia.fxml");
+        URL sceneUrl = CriarPagamentoController.class
+                .getResource("CriarPagamento.fxml");
         Parent root = FXMLLoader.load(sceneUrl);
         Scene scene = new Scene(root);
         return scene;
     }
 
     @FXML
-    protected TextField tfCPFDes;
+    protected TextField tfCodigo;
 
     @FXML
-    protected TextField tfCPFUsu;
+    protected TextField tfCPF;
 
     @FXML
     protected TextField tfValor;
@@ -39,7 +39,7 @@ public class TransferenciaController {
     protected PasswordField ptSenha;
 
     @FXML
-    protected Button btTransferir;
+    protected Button btCriar;
 
     @FXML
     protected Button btVoltar;

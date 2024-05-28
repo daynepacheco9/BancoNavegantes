@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.HomeController">
    <children>
       <Label layoutX="22.0" layoutY="14.0" text="Banco Navegantes">
@@ -56,12 +55,12 @@
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
-      <Button id="btTransferencia" fx:id="btTransferencia" layoutX="252.0" layoutY="183.0" mnemonicParsing="false" text="Transfêrencia">
+      <Button id="btTransferencia" fx:id="btTransferencia" layoutX="252.0" layoutY="183.0" mnemonicParsing="false" onAction="#transferencia" text="Transfêrencia">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
-      <Button id="btDeposito" fx:id="btDeposito" layoutX="407.0" layoutY="259.0" mnemonicParsing="false" text="Depósito">
+      <Button id="btDeposito" fx:id="btDeposito" layoutX="407.0" layoutY="259.0" mnemonicParsing="false" onAction="#deposito" text="Depósito">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
@@ -76,5 +75,6 @@
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
+      <Button id="btSair" fx:id="btSair" layoutX="525.0" layoutY="350.0" mnemonicParsing="false" onAction="#sair" text="Sair" />
    </children>
 </Pane>

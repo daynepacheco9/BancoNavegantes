@@ -15,31 +15,20 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class TransferenciaController {
+public class PagamentoExiController {
     public static Scene CreateScene() throws Exception {
-        URL sceneUrl = TransferenciaController.class
-                .getResource("Transferencia.fxml");
+        URL sceneUrl = PagamentoExiController.class
+                .getResource("PagamentoExi.fxml");
         Parent root = FXMLLoader.load(sceneUrl);
         Scene scene = new Scene(root);
         return scene;
     }
 
     @FXML
-    protected TextField tfCPFDes;
-
-    @FXML
-    protected TextField tfCPFUsu;
-
-    @FXML
-    protected TextField tfValor;
-
-    @FXML
-    protected PasswordField ptSenha;
-
-    @FXML
-    protected Button btTransferir;
+    protected TableView tbPag;
 
     @FXML
     protected Button btVoltar;

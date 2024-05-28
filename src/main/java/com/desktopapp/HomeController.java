@@ -47,4 +47,46 @@ public class HomeController {
     @FXML
     protected Button btPagProg;
 
+    protected Button btSair;
+
+    @FXML
+    protected void transferencia(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btTransferencia
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = TransferenciaController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void sair(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btSair
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = LoginController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void deposito(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btDeposito
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = DepositoController.CreateScene();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }
