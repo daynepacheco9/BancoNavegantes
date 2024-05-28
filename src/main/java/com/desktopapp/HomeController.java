@@ -21,7 +21,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class HomeController {
+
+    private UserData user;
     
+    public void setUser(UserData user) {
+        this.user = user;
+    }
+
     public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = HomeController.class
                 .getResource("Home.fxml");
@@ -31,6 +37,8 @@ public class HomeController {
         HomeController controller = loader.getController();
 
         controller.setLbUsuario(loggedUser.getUsername());
+        controller.setUser(loggedUser);
+        // controller.setLbSaldo("R$ " + String.format("%.2d",loggedUser.getUserbalance()));
        
         return scene;
     }
@@ -96,7 +104,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = DepositoController.CreateScene();
+        Scene scene = DepositoController.CreateScene(user);
         stage.setScene(scene);
         stage.show();
     }

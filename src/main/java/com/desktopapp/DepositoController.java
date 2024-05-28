@@ -2,6 +2,8 @@ package com.desktopapp;
 
 import java.net.URL;
 
+import com.desktopapp.model.UserData;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
