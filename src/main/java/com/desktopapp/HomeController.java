@@ -27,8 +27,8 @@ public class HomeController {
                 .getResource("Home.fxml");
 
         FXMLLoader loader = new FXMLLoader(sceneUrl);
-        HomeController controller = loader.getController();
         Scene scene = new Scene(loader.load());
+        HomeController controller = loader.getController();
 
         controller.setLbUsuario(loggedUser.getUsername());
        

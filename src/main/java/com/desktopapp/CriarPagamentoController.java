@@ -113,9 +113,9 @@ public class CriarPagamentoController {
             return;
         }
 
-        PagamentosData newPag = new PagamentosData(tfCodigo.getText(),(double)tfValor.getText(), null,dividendo.getId());
+        // PagamentosData newPag = new PagamentosData(tfCodigo.getText(),(double)tfValor.getText(), null,dividendo.getId());
 
-        session.save(newPag);
+        // session.save(newPag);
 
         transaction.commit();
 
