@@ -89,7 +89,7 @@ public class DepositoController {
         } if (!regexValue.matches()) {
             Alert alert = new Alert(
                     AlertType.ERROR,
-                    "Insira um valor válido",
+                    "Insira um valor válido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;

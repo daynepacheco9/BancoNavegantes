@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.TranferenciaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.desktopapp.TransferenciaController">
    <children>
       <Label layoutX="32.0" layoutY="24.0" text="Transfêrencia">
          <font>
@@ -26,13 +26,13 @@
             <Font name="Bosch Sans Regular" size="14.0" />
          </font>
       </Label>
-      <Button id="btTransferir" fx:id="btTransferir" layoutX="264.0" layoutY="314.0" mnemonicParsing="false" text="Transferir">
+      <Button id="btTransferir" fx:id="btTransferir" layoutX="264.0" layoutY="314.0" mnemonicParsing="false" onAction="#transferir" text="Transferir">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
       </Button>
       <TextField id="tfCPFUsu" fx:id="tfCPFUsu" layoutX="366.0" layoutY="165.0" prefHeight="25.0" prefWidth="156.0" />
-      <Label id="tfCPFUsu" fx:id="tfCPFUsu" layoutX="366.0" layoutY="133.0" text="CPF (Usuário):">
+      <Label layoutX="366.0" layoutY="133.0" text="CPF (Usuário):">
          <font>
             <Font name="Bosch Sans Regular" size="14.0" />
          </font>

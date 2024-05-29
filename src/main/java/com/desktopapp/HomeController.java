@@ -98,7 +98,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = TransferenciaController.CreateScene();
+        Scene scene = TransferenciaController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }
