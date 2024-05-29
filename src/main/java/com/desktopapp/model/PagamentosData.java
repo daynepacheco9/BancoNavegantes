@@ -14,7 +14,7 @@ public class PagamentosData {
     @Column(name = "Codigo")
     private String codigo;
     @Column(name = "Valor")
-    private double valor;
+    private Double valor;
 
     @ManyToOne
     @JoinColumn(name = "idCliente") // nome da coluna que será a foreign key
@@ -29,7 +29,7 @@ public class PagamentosData {
 
     public PagamentosData(){}
 
-    public PagamentosData(String codigo, double valor, UserData idcliente, UserData iddividendo){
+    public PagamentosData(String codigo, Double valor, UserData idcliente, UserData iddividendo){
         this.codigo = codigo;
         this.valor = valor;
         this.idcliente = idcliente;
