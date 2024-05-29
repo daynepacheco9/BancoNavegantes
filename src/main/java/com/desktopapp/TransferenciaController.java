@@ -172,7 +172,7 @@ public class TransferenciaController {
         UserData destinatario = CPFs.get(0);
 
         this.getUser().setUserbalance(this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText()));
-        destinatario.setUserbalance(destinatario.getUserbalance() + Double.parseDouble(tfValor.getText()));
+        destinatario.setUserbalance(destinatario.getUserbalance() + Double.parseDouble(tfValor.getText().replace(",", ".")));
 
         session.merge(this.getUser());
         session.merge(destinatario);

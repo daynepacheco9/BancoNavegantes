@@ -71,14 +71,44 @@ public class CriarPagamentoController {
 
         @FXML
         protected void criar(ActionEvent e) throws Exception {
-                System.out.println("Debug: Chegou no método criar.");
-                Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
-                                .matcher(tfCPF.getText());
+                Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPF.getText());
+                Matcher regexCodigo = Pattern.compile("^\\d{8,}$").matcher(tfCodigo.getText());
+                Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
 
-                if (!regexCPF.matches()) {
+                if (!regexCodigo.matches()) {
+                        Alert alert = new Alert(
+                                        AlertType.ERROR,
+                                        "Código inválido! O código precisa ser de no mínimo 8 dígitos e apenas números.",
+                                        ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                } if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
+                        Alert alert = new Alert(
+                                AlertType.ERROR,
+                                "Insira um valor!",
+                                ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                } if (!regexValue.matches()) {
+                        Alert alert = new Alert(
+                                AlertType.ERROR,
+                                "Insira um valor válido!",
+                                ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                } if (!regexCPF.matches()) {
                         Alert alert = new Alert(
                                         AlertType.ERROR,
                                         "CPF inválido!",
+                                        ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                } 
+                        
+                if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
+                        Alert alert = new Alert(
+                                        AlertType.ERROR,
+                                        "Senha incorreta!",
                                         ButtonType.OK);
                         alert.showAndWait();
                         return;
@@ -106,19 +136,9 @@ public class CriarPagamentoController {
 
                 UserData dividendo = CPFs.get(0);
 
-                if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
-                        Alert alert = new Alert(
-                                        AlertType.ERROR,
-                                        "Senha incorreta!",
-                                        ButtonType.OK);
-                        alert.showAndWait();
-                        return;
-                }
 
-                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), Double.parseDouble(tfValor.getText()),
+                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), Double.parseDouble(tfValor.getText().replace(",", ".")),
                                 this.getUser(), dividendo);
-
-
 
                 session.save(newPag);
 
