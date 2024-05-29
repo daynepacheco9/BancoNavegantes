@@ -41,12 +41,12 @@ public class PagamentoController {
 
     public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = PagamentoController.class
-                        .getResource("CriarPagamento.fxml");
+                .getResource("Pagamento.fxml");
 
         FXMLLoader loader = new FXMLLoader(sceneUrl);
         Scene scene = new Scene(loader.load());
         PagamentoController controller = loader.getController();
-        
+
         controller.setUser(loggedUser);
 
         return scene;
@@ -71,24 +71,25 @@ public class PagamentoController {
     protected Button btVoltar;
 
     @FXML
-    protected void pagar(ActionEvent e) throws Exception{
+    protected void pagar(ActionEvent e) throws Exception {
         Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
-                                .matcher(tfCPF.getText());
-        Matcher regexCodigo = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
-                                .matcher(tfCodigo.getText());
+                .matcher(tfCPF.getText());
+        Matcher regexCodigo = Pattern.compile("^\\d{8,}$")
+                .matcher(tfCodigo.getText());
         Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
 
-        String cpf = regexCPF.group().replaceAll("[^0-9]", "");
         
         if (!regexCPF.matches()) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "CPF inválido!",
-                            ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-
+                AlertType.ERROR,
+                "CPF inválido!",
+                ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+            
+        String cpf = regexCPF.group().replaceAll("[^0-9]", "");
+        
         if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
             Alert alert = new Alert(
                     AlertType.ERROR,
@@ -96,7 +97,8 @@ public class PagamentoController {
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexValue.matches()) {
+        }
+        if (!regexValue.matches()) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor válido!",
@@ -107,13 +109,13 @@ public class PagamentoController {
 
         if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "Senha incorreta!",
-                            ButtonType.OK);
+                    AlertType.ERROR,
+                    "Senha incorreta!",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         }
-        
+
         if ((this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText())) < 0) {
             Alert alert = new Alert(
                     AlertType.ERROR,
@@ -124,31 +126,32 @@ public class PagamentoController {
         }
 
         Session session = HibernateUtil
-                                .getSessionFactory()
-                                .getCurrentSession();
+                .getSessionFactory()
+                .getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         Query queryCodigo = session
-                                .createQuery("from PagamentosData p where p.codigo = :codigo");
-                queryCodigo.setParameter("codigo",tfCodigo.getText());
-                List<PagamentosData> Codigo = queryCodigo.list();
-        PagamentosData codigo = Codigo.get(0);
+                .createQuery("from PagamentosData p where p.codigo = :codigo");
+        queryCodigo.setParameter("codigo", tfCodigo.getText());
+        List<PagamentosData> Codigo = queryCodigo.list();
 
-        if (codigo.isPaid() == true) {
+        if (Codigo.size() == 0) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "Já foi pago!",
-                            ButtonType.OK);
+                    AlertType.ERROR,
+                    "Codigo não existe!",
+                    ButtonType.OK);
             alert.showAndWait();
             transaction.commit();
             return;
         }
 
-        if (Codigo.size() == 0) {
+        PagamentosData codigo = Codigo.get(0);
+
+        if (codigo.isPaid() == true) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "Codigo não existe!",
-                            ButtonType.OK);
+                    AlertType.ERROR,
+                    "Já foi pago!",
+                    ButtonType.OK);
             alert.showAndWait();
             transaction.commit();
             return;
@@ -156,24 +159,25 @@ public class PagamentoController {
 
         if (!codigo.getIdcliente().getUsercpf().equals(cpf)) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "CPF Incorreto",
-                            ButtonType.OK);
+                    AlertType.ERROR,
+                    "CPF Incorreto",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         }
 
         if (Double.parseDouble(tfValor.getText().replace(",", ".")) != codigo.getValor()) {
             Alert alert = new Alert(
-                            AlertType.ERROR,
-                            "Valor inválido",
-                            ButtonType.OK);
+                    AlertType.ERROR,
+                    "Valor inválido",
+                    ButtonType.OK);
             alert.showAndWait();
             return;
         }
 
         this.getUser().setUserbalance(this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText()));
-        codigo.getIdcliente().setUserbalance(codigo.getIdcliente().getUserbalance() + Double.parseDouble(tfValor.getText()));
+        codigo.getIdcliente()
+                .setUserbalance(codigo.getIdcliente().getUserbalance() + Double.parseDouble(tfValor.getText()));
 
         codigo.setPaid(true);
         session.merge(this.getUser());
@@ -183,16 +187,15 @@ public class PagamentoController {
         transaction.commit();
 
         Stage crrStage = (Stage) btPagar
-                                .getScene().getWindow();
-                crrStage.close();
+                .getScene().getWindow();
+        crrStage.close();
 
-                Stage stage = new Stage();
-                Scene scene = HomeController.CreateScene(this.getUser());
-                stage.setScene(scene);
-                stage.show();
+        Stage stage = new Stage();
+        Scene scene = HomeController.CreateScene(this.getUser());
+        stage.setScene(scene);
+        stage.show();
 
     }
-
 
     @FXML
     protected void voltar(ActionEvent e) throws Exception {
