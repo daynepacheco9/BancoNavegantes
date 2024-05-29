@@ -2,6 +2,9 @@ package com.desktopapp;
 
 import java.net.URL;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.desktopapp.model.UserData;
 
 import javafx.event.ActionEvent;
@@ -32,6 +35,16 @@ public class HomeController {
         return this.user;
     }
 
+    HomeController controller;
+
+    public HomeController getController() {
+        return controller;
+    }
+
+    public void setController(HomeController controller) {
+        this.controller = controller;
+    }
+
     public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = HomeController.class
                 .getResource("Home.fxml");
@@ -42,7 +55,10 @@ public class HomeController {
 
         controller.setLbUsuario(loggedUser.getUsername());
         controller.setUser(loggedUser);
-        controller.setLbSaldo("R$ " + (loggedUser.getIsShowing() ? String.format("%.2f",loggedUser.getUserbalance()) : "*****"));
+
+        controller.setController(controller);
+
+        controller.setLbSaldo(loggedUser.getIsShowing() ? String.format("%.2f",loggedUser.getUserbalance()) : "*****");
        
         return scene;
     }
@@ -154,13 +170,24 @@ public class HomeController {
 
     @FXML
     protected void visualizar(ActionEvent e) throws Exception {
-        this.user.setIsShowing(!this.user.getIsShowing());
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        this.getUser().setIsShowing(!this.getUser().getIsShowing());
+
+        session.merge(this.getUser());
+        transaction.commit();
+
+        controller.setLbSaldo(this.getUser().getIsShowing() ? String.format("%.2f",this.getUser().getUserbalance()) : "*****");
     }
 
 
     public Label getLbUsuario() {
         return lbUsuario;
-    }
+    }   
 
     public void setLbUsuario(String usuario) {
         this.lbUsuario.setText(usuario);

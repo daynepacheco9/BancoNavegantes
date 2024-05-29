@@ -34,7 +34,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button id="btVisualizar" fx:id="btVisualizar" layoutX="516.0" layoutY="60.0" mnemonicParsing="false" text="Visualizar" />
+      <Button id="btVisualizar" fx:id="btVisualizar" layoutX="516.0" layoutY="60.0" mnemonicParsing="false" onAction="#visualizar" text="Visualizar" />
       <ImageView fitHeight="84.0" fitWidth="95.0" layoutX="71.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../img/3076631.png" />
