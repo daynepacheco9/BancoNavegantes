@@ -29,7 +29,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label id="lbSaldo" fx:id="lbSaldo" layoutX="450.0" layoutY="59.0" text="0000.00">
+      <Label id="lbSaldo" fx:id="lbSaldo" layoutX="450.0" layoutY="59.0" text="*******">
          <font>
             <Font size="16.0" />
          </font>
@@ -50,7 +50,7 @@
             <Image url="@../../img/2146144.png" />
          </image>
       </ImageView>
-      <Button id="btPagamento" fx:id="btPagamento" layoutX="69.0" layoutY="206.0" mnemonicParsing="false" onAction="#pagamento" text="Pagamentos">
+      <Button id="btPagamento" fx:id="btPagamento" layoutX="69.0" layoutY="206.0" mnemonicParsing="false" text="Pagamentos">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>

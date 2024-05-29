@@ -28,6 +28,10 @@ public class HomeController {
         this.user = user;
     }
 
+    public UserData getUser() {
+        return this.user;
+    }
+
     public static Scene CreateScene(UserData loggedUser) throws Exception {
         URL sceneUrl = HomeController.class
                 .getResource("Home.fxml");
@@ -38,7 +42,7 @@ public class HomeController {
 
         controller.setLbUsuario(loggedUser.getUsername());
         controller.setUser(loggedUser);
-        // controller.setLbSaldo("R$ " + String.format("%.2d",loggedUser.getUserbalance()));
+        controller.setLbSaldo("R$ " + (loggedUser.getIsShowing() ? String.format("%.2f",loggedUser.getUserbalance()) : "*****"));
        
         return scene;
     }
@@ -148,6 +152,10 @@ public class HomeController {
         stage.show();
     }
 
+    @FXML
+    protected void visualizar(ActionEvent e) throws Exception {
+        this.user.setIsShowing(!this.user.getIsShowing());
+    }
 
 
     public Label getLbUsuario() {
