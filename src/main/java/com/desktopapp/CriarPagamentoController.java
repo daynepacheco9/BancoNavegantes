@@ -144,5 +144,17 @@ public class CriarPagamentoController {
                 stage.show();
 
         }
+        @FXML
+        protected void voltar(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btVoltar
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = HomeController.CreateScene(this.getUser());
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

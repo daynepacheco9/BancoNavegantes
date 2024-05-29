@@ -1,5 +1,7 @@
 package com.desktopapp;
 
+import com.desktopapp.model.UserData;
+
 import java.net.URL;
 
 import javafx.event.ActionEvent;
@@ -18,13 +20,27 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class PagamentoController {
-    public static Scene CreateScene() throws Exception {
-        URL sceneUrl = PagamentoController.class
-                .getResource("Pagamento.fxml");
-        Parent root = FXMLLoader.load(sceneUrl);
-        Scene scene = new Scene(root);
-        return scene;
+    private UserData user;
+
+    public void setUser(UserData user) {
+        this.user = user;
     }
+
+    public UserData getUser() {
+        return this.user;
+    }
+
+    public static Scene CreateScene(UserData loggedUser) throws Exception {
+        URL sceneUrl = PagamentoController.class
+                        .getResource("CriarPagamento.fxml");
+
+        FXMLLoader loader = new FXMLLoader(sceneUrl);
+        Scene scene = new Scene(loader.load());
+        PagamentoController controller = loader.getController();
+        
+
+        return scene;
+}
 
     @FXML
     protected TextField tfCodigo;
@@ -47,15 +63,26 @@ public class PagamentoController {
     // @FXML
     // protected void voltar(ActionEvent e) throws Exception {
 
-    //     Stage crrStage = (Stage) btVoltar
-    //             .getScene().getWindow();
-    //     crrStage.close();
+    // Stage crrStage = (Stage) btVoltar
+    // .getScene().getWindow();
+    // crrStage.close();
 
-    //     Stage stage = new Stage();
-    //     Scene scene = HomeController.CreateScene();
-    //     stage.setScene(scene);
-    //     stage.show();
+    // Stage stage = new Stage();
+    // Scene scene = HomeController.CreateScene();
+    // stage.setScene(scene);
+    // stage.show();
     // }
 
-    
+    @FXML
+        protected void voltar(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btVoltar
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = HomeController.CreateScene(this.getUser());
+        stage.setScene(scene);
+        stage.show();
+        }
 }

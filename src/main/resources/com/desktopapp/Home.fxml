@@ -50,7 +50,7 @@
             <Image url="@../../img/2146144.png" />
          </image>
       </ImageView>
-      <Button id="btPagamento" fx:id="btPagamento" layoutX="69.0" layoutY="206.0" mnemonicParsing="false" text="Pagamentos">
+      <Button id="btPagamento" fx:id="btPagamento" layoutX="69.0" layoutY="206.0" mnemonicParsing="false" onAction="#pagamento" text="Pagamentos">
          <font>
             <Font name="Bosch Sans Regular" size="12.0" />
          </font>
