@@ -137,7 +137,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = CriarPagamentoController.CreateScene();
+        Scene scene = CriarPagamentoController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }

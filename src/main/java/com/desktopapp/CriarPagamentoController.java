@@ -29,7 +29,15 @@ import javafx.scene.control.TextField;
 
 public class CriarPagamentoController {
 
-        private UserData userData;
+        private UserData user;
+    
+        public void setUser(UserData user) {
+            this.user = user;
+        }
+    
+        public UserData getUser() {
+            return this.user;
+        }
         
         public static Scene CreateScene(UserData loggedUser) throws Exception {
                 URL sceneUrl = CriarPagamentoController.class
@@ -101,7 +109,7 @@ public class CriarPagamentoController {
                 if (CPFs.size() == 0) {
                         Alert alert = new Alert(
                                         AlertType.ERROR,
-                                        "CPF já cadastrado!",
+                                        "CPF não cadastrado!",
                                         ButtonType.OK);
                         alert.showAndWait();
                         transaction.commit();
@@ -119,8 +127,8 @@ public class CriarPagamentoController {
                         return;
                 }
 
-                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), (double) tfValor.getText(),
-                                loggedUser.getId(), dividendo.getId());
+                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), Double.parseDouble(tfValor.getText()) ,
+                        this.getUser(), dividendo);
 
                 session.save(newPag);
 
@@ -131,10 +139,22 @@ public class CriarPagamentoController {
                 crrStage.close();
 
                 Stage stage = new Stage();
-                Scene scene = HomeController.CreateScene(dividendo);
+                Scene scene = HomeController.CreateScene(this.getUser());
                 stage.setScene(scene);
                 stage.show();
 
         }
+        @FXML
+        protected void voltar(ActionEvent e) throws Exception {
+
+        Stage crrStage = (Stage) btVoltar
+                .getScene().getWindow();
+        crrStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = HomeController.CreateScene(this.getUser());
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }
