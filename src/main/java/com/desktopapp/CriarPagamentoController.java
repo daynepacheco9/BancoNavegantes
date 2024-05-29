@@ -15,15 +15,14 @@ import org.hibernate.Transaction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
+
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -71,7 +70,6 @@ public class CriarPagamentoController {
 
         @FXML
         protected void criar(ActionEvent e) throws Exception {
-                System.out.println("Debug: Chegou no método criar.");
                 Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
                                 .matcher(tfCPF.getText());
 

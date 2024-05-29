@@ -1,7 +1,5 @@
 package com.desktopapp;
 
-import com.desktopapp.LoginController;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
