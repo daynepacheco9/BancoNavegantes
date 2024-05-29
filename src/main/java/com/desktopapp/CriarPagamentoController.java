@@ -30,15 +30,15 @@ import javafx.scene.control.TextField;
 public class CriarPagamentoController {
 
         private UserData user;
-    
+
         public void setUser(UserData user) {
-            this.user = user;
+                this.user = user;
         }
-    
+
         public UserData getUser() {
-            return this.user;
+                return this.user;
         }
-        
+
         public static Scene CreateScene(UserData loggedUser) throws Exception {
                 URL sceneUrl = CriarPagamentoController.class
                                 .getResource("CriarPagamento.fxml");
@@ -46,7 +46,7 @@ public class CriarPagamentoController {
                 FXMLLoader loader = new FXMLLoader(sceneUrl);
                 Scene scene = new Scene(loader.load());
                 CriarPagamentoController controller = loader.getController();
-                
+                controller.setUser(loggedUser);
 
                 return scene;
         }
@@ -69,21 +69,9 @@ public class CriarPagamentoController {
         @FXML
         protected Button btVoltar;
 
-        // @FXML
-        // protected void voltar(ActionEvent e) throws Exception {
-
-        // Stage crrStage = (Stage) btVoltar
-        // .getScene().getWindow();
-        // crrStage.close();
-
-        // Stage stage = new Stage();
-        // Scene scene = HomeController.CreateScene();
-        // stage.setScene(scene);
-        // stage.show();
-        // }
-
         @FXML
         protected void criar(ActionEvent e) throws Exception {
+                System.out.println("Debug: Chegou no método criar.");
                 Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
                                 .matcher(tfCPF.getText());
 
@@ -118,7 +106,7 @@ public class CriarPagamentoController {
 
                 UserData dividendo = CPFs.get(0);
 
-                if (!dividendo.getUserpass().equals(pfSenha.getText())) {
+                if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
                         Alert alert = new Alert(
                                         AlertType.ERROR,
                                         "Senha incorreta!",
@@ -127,8 +115,10 @@ public class CriarPagamentoController {
                         return;
                 }
 
-                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), Double.parseDouble(tfValor.getText()) ,
-                        this.getUser(), dividendo);
+                PagamentosData newPag = new PagamentosData(tfCodigo.getText(), Double.parseDouble(tfValor.getText()),
+                                this.getUser(), dividendo);
+
+
 
                 session.save(newPag);
 
@@ -144,17 +134,18 @@ public class CriarPagamentoController {
                 stage.show();
 
         }
+
         @FXML
         protected void voltar(ActionEvent e) throws Exception {
 
-        Stage crrStage = (Stage) btVoltar
-                .getScene().getWindow();
-        crrStage.close();
+                Stage crrStage = (Stage) btVoltar
+                                .getScene().getWindow();
+                crrStage.close();
 
-        Stage stage = new Stage();
-        Scene scene = HomeController.CreateScene(this.getUser());
-        stage.setScene(scene);
-        stage.show();
-    }
+                Stage stage = new Stage();
+                Scene scene = HomeController.CreateScene(this.getUser());
+                stage.setScene(scene);
+                stage.show();
+        }
 
 }

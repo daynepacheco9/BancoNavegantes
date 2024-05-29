@@ -98,7 +98,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = TransferenciaController.CreateScene();
+        Scene scene = TransferenciaController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }
@@ -150,7 +150,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = PagamentoExiController.CreateScene();
+        Scene scene = PagamentoExiController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }
@@ -163,7 +163,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = PagamentoController.CreateScene();
+        Scene scene = PagamentoController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }
