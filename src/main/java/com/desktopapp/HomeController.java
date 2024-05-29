@@ -124,7 +124,7 @@ public class HomeController {
         crrStage.close();
 
         Stage stage = new Stage();
-        Scene scene = DepositoController.CreateScene(user);
+        Scene scene = DepositoController.CreateScene(this.getUser());
         stage.setScene(scene);
         stage.show();
     }
