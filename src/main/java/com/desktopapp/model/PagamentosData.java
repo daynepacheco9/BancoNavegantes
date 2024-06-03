@@ -1,9 +1,6 @@
 package com.desktopapp.model;
 
-import java.sql.Date;
-
 import javax.persistence.*;
-import javax.transaction.UserTransaction;
 
 @Entity
 @Table(name = "PagamentosData")
@@ -88,12 +85,12 @@ public class PagamentosData {
     }
 
 
-    public boolean isPaidOut() {
+    public boolean getPaid() {
         return paid;
     }
 
 
-    public void setPaidOut(boolean paid) {
+    public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
