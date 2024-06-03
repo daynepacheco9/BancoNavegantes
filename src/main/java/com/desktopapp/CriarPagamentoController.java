@@ -74,9 +74,9 @@ public class CriarPagamentoController {
 
                 if (!regexCodigo.matches()) {
                         Alert alert = new Alert(
-                                        AlertType.ERROR,
-                                        "Código inválido! O código precisa ser de no mínimo 8 dígitos e apenas números.",
-                                        ButtonType.OK);
+                                AlertType.ERROR,
+                                "Código inválido! O código precisa ser de no mínimo 8 dígitos e apenas números.",
+                                ButtonType.OK);
                         alert.showAndWait();
                         return;
                 } if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
@@ -116,6 +116,21 @@ public class CriarPagamentoController {
                                 .getCurrentSession();
                 Transaction transaction = session.beginTransaction();
 
+                Query queryCod = session
+                                .createQuery("from PagamentosData u where u.codigo = :cod");
+                queryCod.setParameter("cod", tfCodigo.getText());
+                List<UserData> cods = queryCod.list();
+
+                if (cods.size() != 0) {
+                        Alert alert = new Alert(
+                                AlertType.ERROR,
+                                "Código já cadastrado!",
+                                ButtonType.OK);
+                        alert.showAndWait();
+                        transaction.commit();
+                        return;
+                }
+
                 Query queryCPF = session
                                 .createQuery("from UserData u where u.usercpf = :cpf");
                 queryCPF.setParameter("cpf", regexCPF.group().replaceAll("[^0-9]", ""));
@@ -123,9 +138,9 @@ public class CriarPagamentoController {
 
                 if (CPFs.size() == 0) {
                         Alert alert = new Alert(
-                                        AlertType.ERROR,
-                                        "CPF não cadastrado!",
-                                        ButtonType.OK);
+                                AlertType.ERROR,
+                                "CPF não cadastrado!",
+                                ButtonType.OK);
                         alert.showAndWait();
                         transaction.commit();
                         return;

@@ -20,10 +20,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 
 public class PagamentoExiController {
 
@@ -82,8 +85,6 @@ public class PagamentoExiController {
                                 PagamentosItem colitem = getTableView().getItems().get(getIndex());
                                 String codigo = colitem.getCodigo();
 
-                                list.remove(getIndex());
-
                                 Session session = HibernateUtil
                                         .getSessionFactory()
                                         .getCurrentSession();
@@ -94,6 +95,17 @@ public class PagamentoExiController {
                                 queryPag.setParameter("cod", codigo);
                                 List<PagamentosData> exData = queryPag.list();
 
+                                if (exData.get(0).getPaid()) {
+                                    Alert alert = new Alert(
+                                            AlertType.ERROR,
+                                            "Não é possível apagar um pagamento já pago!",
+                                            ButtonType.OK);
+                                    alert.showAndWait();
+                                    transaction.commit();
+                                    return;
+                                }
+
+                                list.remove(getIndex());
                                 session.delete(exData.get(0));
 
                                 transaction.commit();

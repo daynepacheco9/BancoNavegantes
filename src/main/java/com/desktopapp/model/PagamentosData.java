@@ -34,51 +34,41 @@ public class PagamentosData {
         this.paid = false;
     }
 
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
 
     public String getCodigo() {
         return codigo;
     }
 
-
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
-
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
-
 
     public UserData getIdcliente() {
         return idcliente;
     }
 
-
     public void setIdcliente(UserData idcliente) {
         this.idcliente = idcliente;
     }
 
-
     public UserData getIddividendo() {
         return iddividendo;
     }
-
 
     public void setIddividendo(UserData iddividendo) {
         this.iddividendo = iddividendo;
@@ -95,7 +85,6 @@ public class PagamentosData {
     }
 
     
-
-
+    
 
 }

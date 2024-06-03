@@ -49,6 +49,8 @@ public class HomeController {
         controller.setLbUsuario(loggedUser.getUsername());
         controller.setUser(loggedUser);
 
+        loggedUser.setIsShowing(false);
+
         controller.setController(controller);
 
         controller.setLbSaldo(loggedUser.getIsShowing() ? String.format("%.2f",loggedUser.getUserbalance()) : "*****");
