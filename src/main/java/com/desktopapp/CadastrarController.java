@@ -64,18 +64,15 @@ public class CadastrarController {
     @FXML
     protected void cadastrar(ActionEvent e) throws Exception {
 
-        Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPF.getText());
-        Matcher regexPhone = Pattern.compile("^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[0-9])[0-9]{3}\\-?[0-9]{4}$").matcher(tfFone.getText());
-        Matcher regexEmail = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$").matcher(tfEmail.getText());
 
-        if (tfNome.getText().isEmpty() || tfNome.getText() == null) {
+        if (Tests.isEmptyNull(tfNome.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Nome inválido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexCPF.matches()) {
+        } if (!Tests.cpfIsValid(tfCPF.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF inválido!",
@@ -90,30 +87,28 @@ public class CadastrarController {
             alert.showAndWait();
             return;
         }
-
-        int age = (Period.between(dpData.getValue(), LocalDate.now())).getYears();
-        if (age < 18) {
+        if (Tests.isUnderAge(dpData.getValue())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Menores de idade não são permitidos no Banco Navegantes!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexPhone.matches()) {
+        } if (!Tests.phoneIsValid(tfFone.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Telefone inválido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexEmail.matches()) {
+        } if (!Tests.emailIsValid(tfEmail.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "E-mail inválido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (pfSenha.getText().isEmpty() || pfCSenha.getText() == null) {
+        } if (Tests.isEmptyNull(pfSenha.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Digite uma senha!",
@@ -136,7 +131,7 @@ public class CadastrarController {
 
         Query queryCPF = session 
                 .createQuery("from UserData u where u.usercpf = :cpf");
-        queryCPF.setParameter("cpf", regexCPF.group().replaceAll("[^0-9]", ""));
+        queryCPF.setParameter("cpf", tfCPF.getText().replaceAll("[^0-9]", ""));
         List<UserData> CPFs = queryCPF.list();
 
         if (CPFs.size() != 0) {
@@ -151,7 +146,7 @@ public class CadastrarController {
 
         Query queryPhone = session
                 .createQuery("from UserData u where u.userphone = :phone");
-        queryPhone.setParameter("phone", regexPhone.group().replaceAll("[^0-9]", ""));
+        queryPhone.setParameter("phone", tfFone.getText().replaceAll("[^0-9]", ""));
         List<UserData> phones = queryPhone.list();
 
         if (phones.size() != 0) {
@@ -179,8 +174,8 @@ public class CadastrarController {
             return;
         }
 
-        UserData newUser = new UserData(tfNome.getText(), pfSenha.getText(), regexCPF.group().replaceAll("[^0-9]", ""),
-                Date.valueOf(dpData.getValue()), regexPhone.group().replaceAll("[^0-9]", ""), tfEmail.getText());
+        UserData newUser = new UserData(tfNome.getText(), pfSenha.getText(), tfCPF.getText().replaceAll("[^0-9]", ""),
+                Date.valueOf(dpData.getValue()), tfFone.getText().replaceAll("[^0-9]", ""), tfEmail.getText());
 
         session.save(newUser);
 

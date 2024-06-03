@@ -45,9 +45,7 @@ public class LoginController {
     @FXML
     protected void tryLogin()throws Exception {
 
-        Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfLogin.getText());
-
-        if (!regexCPF.matches()) {
+        if (!Tests.cpfIsValid(tfLogin.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF inválido!",
@@ -56,7 +54,7 @@ public class LoginController {
             return;
         }
 
-        String cpf = regexCPF.group().replaceAll("[^0-9]", "");
+        String cpf = tfLogin.getText().replaceAll("[^0-9]", "");
 
         Session session = HibernateUtil
                 .getSessionFactory()

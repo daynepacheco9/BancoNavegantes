@@ -72,25 +72,21 @@ public class DepositoController {
     @FXML
     protected void depositar(ActionEvent e) throws Exception {
 
-        Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
-
-        if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
+        if (Tests.isEmptyNull(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexValue.matches()) {
+        } if (!Tests.valueIsValid(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor válido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
+        } if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Senha incorreta!",

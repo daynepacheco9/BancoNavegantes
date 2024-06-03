@@ -68,32 +68,29 @@ public class CriarPagamentoController {
 
         @FXML
         protected void criar(ActionEvent e) throws Exception {
-                Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPF.getText());
-                Matcher regexCodigo = Pattern.compile("^\\d{8,}$").matcher(tfCodigo.getText());
-                Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
 
-                if (!regexCodigo.matches()) {
+                if (!Tests.codeIsValid(tfCodigo.getText())) {
                         Alert alert = new Alert(
                                 AlertType.ERROR,
                                 "Código inválido! O código precisa ser de no mínimo 8 dígitos e apenas números.",
                                 ButtonType.OK);
                         alert.showAndWait();
                         return;
-                } if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
+                } if (Tests.isEmptyNull(tfValor.getText())) {
                         Alert alert = new Alert(
                                 AlertType.ERROR,
                                 "Insira um valor!",
                                 ButtonType.OK);
                         alert.showAndWait();
                         return;
-                } if (!regexValue.matches()) {
+                } if (!Tests.valueIsValid(tfValor.getText())) {
                         Alert alert = new Alert(
                                 AlertType.ERROR,
                                 "Insira um valor válido!",
                                 ButtonType.OK);
                         alert.showAndWait();
                         return;
-                } if (!regexCPF.matches()) {
+                } if (!Tests.cpfIsValid(tfCPF.getText())) {
                         Alert alert = new Alert(
                                         AlertType.ERROR,
                                         "CPF inválido!",
@@ -133,7 +130,7 @@ public class CriarPagamentoController {
 
                 Query queryCPF = session
                                 .createQuery("from UserData u where u.usercpf = :cpf");
-                queryCPF.setParameter("cpf", regexCPF.group().replaceAll("[^0-9]", ""));
+                queryCPF.setParameter("cpf", tfCPF.getText().replaceAll("[^0-9]", ""));
                 List<UserData> CPFs = queryCPF.list();
 
                 if (CPFs.size() == 0) {

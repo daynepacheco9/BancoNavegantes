@@ -69,14 +69,8 @@ public class PagamentoController {
 
     @FXML
     protected void pagar(ActionEvent e) throws Exception {
-        Matcher regexCPF = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}")
-                .matcher(tfCPF.getText());
-        Matcher regexCodigo = Pattern.compile("^\\d{8,}$")
-                .matcher(tfCodigo.getText());
-        Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
-
-        
-        if (!regexCPF.matches()) {
+       
+        if (!Tests.cpfIsValid(tfCPF.getText())) {
             Alert alert = new Alert(
                 AlertType.ERROR,
                 "CPF inválido!",
@@ -85,9 +79,9 @@ public class PagamentoController {
                 return;
             }
             
-        String cpf = regexCPF.group().replaceAll("[^0-9]", "");
+        String cpf = tfCPF.getText().replaceAll("[^0-9]", "");
         
-        if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
+        if (Tests.isEmptyNull(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor!",
@@ -95,25 +89,21 @@ public class PagamentoController {
             alert.showAndWait();
             return;
         }
-        if (!regexValue.matches()) {
+        if (!Tests.valueIsValid(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor válido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
+        } if (!this.getUser().getUserpass().equals(pfSenha.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Senha incorreta!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        if ((this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText())) < 0) {
+        } if ((this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText())) < 0) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Saldo insuficiente!",
@@ -152,18 +142,14 @@ public class PagamentoController {
             alert.showAndWait();
             transaction.commit();
             return;
-        }
-
-        if (!codigo.getIdcliente().getUsercpf().equals(cpf)) {
+        } if (!codigo.getIdcliente().getUsercpf().equals(cpf)) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF Incorreto",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        if (Double.parseDouble(tfValor.getText().replace(",", ".")) != codigo.getValor()) {
+        } if (Double.parseDouble(tfValor.getText().replace(",", ".")) != codigo.getValor()) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Valor inválido",
