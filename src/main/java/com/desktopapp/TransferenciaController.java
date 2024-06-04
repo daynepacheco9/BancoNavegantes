@@ -81,8 +81,7 @@ public class TransferenciaController {
     @FXML
     protected void transferir(ActionEvent e) throws Exception {
 
-        Matcher regexCPFDes = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPFDes.getText());
-        if (!regexCPFDes.matches()) {
+        if (!Tests.cpfIsValid(tfCPFDes.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF do destinatário inválido!",
@@ -91,33 +90,28 @@ public class TransferenciaController {
             return;
         }
 
-        Matcher regexCPFUsu = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}").matcher(tfCPFUsu.getText());
-        if (!regexCPFUsu.matches()) {
+        if (!Tests.cpfIsValid(tfCPFUsu.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF do usuário  inválido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexCPFUsu.group().replaceAll("[^0-9]", "").equals(this.getUser().getUsercpf())) {
+        } if (!tfCPFUsu.getText().replaceAll("[^0-9]", "").equals(this.getUser().getUsercpf())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "CPF do usuário  inválido!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        Matcher regexValue = Pattern.compile("^\\d+(?:[\\.,]\\d{1,2})?$").matcher(tfValor.getText());
-
-        if (tfValor.getText().isEmpty() || tfValor.getText() == null) {
+        } if (Tests.isEmptyNull(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor!",
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        } if (!regexValue.matches()) {
+        } if (!Tests.valueIsValid(tfValor.getText())) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Insira um valor válido!",
@@ -133,9 +127,7 @@ public class TransferenciaController {
                     ButtonType.OK);
             alert.showAndWait();
             return;
-        }
-
-        if ((this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText())) < 0) {
+        } if ((this.getUser().getUserbalance() - Double.parseDouble(tfValor.getText())) < 0) {
             Alert alert = new Alert(
                     AlertType.ERROR,
                     "Saldo insuficiente!",
@@ -144,7 +136,7 @@ public class TransferenciaController {
             return;
         }
 
-        String cpf = regexCPFDes.group().replaceAll("[^0-9]", "");
+        String cpf = tfCPFDes.getText().replaceAll("[^0-9]", "");
 
         Session session = HibernateUtil
                 .getSessionFactory()

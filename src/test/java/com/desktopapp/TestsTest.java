@@ -2,7 +2,11 @@ package com.desktopapp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.util.converter.LocalDateStringConverter;
 
 public class TestsTest {
 
@@ -177,14 +181,14 @@ public class TestsTest {
         );
     }
 
-    // @Test
-    // void isUnderAge() {
-    //     assertEquals(
-    //         Tests.isUnderAge(18), false
-    //     );
+    @Test
+    void isUnderAge() {
+        assertEquals(
+            Tests.isUnderAge(LocalDate.of(2006, 6, 4)), false
+        );
 
-    //     assertEquals(
-    //         Tests.isUnderAge(17), true
-    //     );
-    // }
+        assertEquals(
+            Tests.isUnderAge(LocalDate.of(2006, 6, 5)), true
+        );
+    }
 }
